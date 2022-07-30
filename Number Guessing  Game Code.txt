@@ -1,0 +1,58 @@
+
+
+package com;
+
+import java.util.Scanner;
+import java.lang.Math;
+
+public class Main {
+	public static void main(String[] args) {
+		new Task2();
+	}
+}
+
+class Task2 {
+	private boolean isMatch = false;
+	private int score = 105;
+
+	int generateRandomNumber(int min, int max) {
+		return (int) (Math.random() * (max - min + 1) + min);
+	}
+
+	Task2() {
+		this.startGame();
+	}
+
+	String checkNo(int enteredNo, int actualNo) {
+		if (enteredNo > actualNo)
+			return "Your number is large";
+		else if (enteredNo < actualNo)
+			return "Your number is  small";
+		else if (enteredNo == actualNo) {
+			isMatch = true;
+			return "Fintastic you guess exact number";
+		} else
+			return "Error";
+	}
+
+	void result() {
+		if (this.score < 40)
+			System.out.println("You loss this game");
+		else
+			System.out.println("You win this game");
+		System.out.println("Total Points: " + this.score);
+
+	}
+
+	void startGame() {
+		int randomNo = this.generateRandomNumber(1, 100);
+		int no = 0;
+		do {
+			score -= 5;
+			System.out.println("Guess Number: ");
+			no = new Scanner(System.in).nextInt();
+			System.out.println(checkNo(no, randomNo));
+		} while (!this.isMatch);
+		System.out.println("Your Score: " + this.score);
+	}
+}
